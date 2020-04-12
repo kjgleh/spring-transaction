@@ -1,0 +1,50 @@
+spring:
+    profiles:
+        active: mysql
+    jpa:
+        hibernate:
+            ddl-auto: create
+        properties:
+            hibernate:
+                format_sql: true
+        show-sql: true
+logging:
+    level:
+        com:
+            extriber: DEBUG
+        org:
+            hibernate:
+                type:
+                    descriptor:
+                        sql: trace
+
+# local
+---
+spring:
+    profiles: h2
+    h2:
+        console:
+            enabled: true
+            path: /h2-console
+    datasource:
+        driver-class-name: org.h2.Driver
+        url: jdbc:h2:file:~/kjgleh/spring-transaction
+        username: sa
+    jpa:
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.H2Dialect
+
+# mysql
+---
+spring:
+    profiles: mysql
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:23306/kjgleh?allowPublicKeyRetrieval=true&useSSL=false
+        username: root
+        password: password
+    jpa:
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.MySQL57Dialect
